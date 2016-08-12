@@ -644,6 +644,13 @@ bool JniObject::convertFromJavaObject(JNIEnv* env, jobject obj, JniObject& out)
 }
 
 template<>
+bool JniObject::convertFromJavaObject(JNIEnv* env, jobject obj, jobject& out)
+{
+	out = obj;
+	return true;
+}
+
+template<>
 bool JniObject::convertFromJavaObject(JNIEnv* env, jobject obj, int& out)
 {
 	out = JniObject("java/lang/Integer", obj).call("intValue", out);
