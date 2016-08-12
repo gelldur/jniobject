@@ -109,32 +109,28 @@ jclass Jni::getClass(const std::string& classPath, bool cache)
 #pragma mark - JniObject
 
 JniObject::JniObject(const std::string& classPath, jobject objId, jclass classId)
-		:
-		_instance(nullptr)
+		: _instance(nullptr)
 		, _class(nullptr)
 {
 	init(objId, classId, classPath);
 }
 
 JniObject::JniObject(jclass classId, jobject objId)
-		:
-		_instance(nullptr)
+		: _instance(nullptr)
 		, _class(nullptr)
 {
 	init(objId, classId);
 }
 
 JniObject::JniObject(jobject objId)
-		:
-		_instance(nullptr)
+		: _instance(nullptr)
 		, _class(nullptr)
 {
 	init(objId);
 }
 
 JniObject::JniObject(const JniObject& other)
-		:
-		_instance(nullptr)
+		: _instance(nullptr)
 		, _class(nullptr)
 {
 	init(other._instance, other._class, other._classPath);
