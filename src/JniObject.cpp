@@ -1,4 +1,4 @@
-#include "JniObject.hpp"
+#include "JniObject.h"
 #include <algorithm>
 #include <pthread.h>
 
