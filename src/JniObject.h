@@ -168,6 +168,8 @@ private:
 	{
 	}
 
+	void fixClassPath(std::string& classPath) const;
+
 	/**
 	 * Return the signature for the given type
 	 */

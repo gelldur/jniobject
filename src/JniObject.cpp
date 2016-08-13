@@ -140,7 +140,7 @@ void JniObject::init(jobject objId, jclass classId, const std::string& classPath
 {
 	JNIEnv* env = getEnvironment();
 	_classPath = classPath;
-	std::replace(_classPath.begin(), _classPath.end(), '.', '/');
+	fixClassPath(_classPath);
 	if (env)
 	{
 		if (!classId)
@@ -227,6 +227,7 @@ const std::string& JniObject::getClassPath() const
 		try
 		{
 			_classPath = JniObject("java/lang/Class", _class).call("getName", _classPath);
+			fixClassPath(_classPath);
 		}
 		catch (JniException e)
 		{
@@ -879,6 +880,11 @@ template<>
 jobject JniObject::getJavaField(JNIEnv* env, jobject objId, jfieldID fieldId)
 {
 	return env->GetObjectField(objId, fieldId);
+}
+
+void JniObject::fixClassPath(std::string& classPath) const
+{
+	std::replace(classPath.begin(), classPath.end(), '.', '/');
 }
 
 template<>
