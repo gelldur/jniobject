@@ -98,26 +98,6 @@ private:
 	{
 	}
 
-	template<typename Return, typename... Args>
-	static std::string createSignature(const Return& ret, const Args& ... args)
-	{
-		std::ostringstream os;
-		os << "(";
-		buildSignature(os, args...);
-		os << ")" << getSignaturePart(ret);
-		return os.str();
-	}
-
-	template<typename... Args>
-	static std::string createVoidSignature(const Args& ... args)
-	{
-		std::ostringstream os;
-		os << "(";
-		buildSignature(os, args...);
-		os << ")" << getSignaturePart();
-		return os.str();
-	}
-
 	template<typename... Args>
 	static jvalue* createArguments(const Args& ... args)
 	{
@@ -285,6 +265,26 @@ public:
 	 * will try the `instance` static field and a `getInstance` static method
 	 */
 	static JniObject findSingleton(const std::string& classPath);
+
+	template<typename Return, typename... Args>
+	static std::string createSignature(const Return& ret, const Args& ... args)
+	{
+		std::ostringstream os;
+		os << "(";
+		buildSignature(os, args...);
+		os << ")" << getSignaturePart(ret);
+		return os.str();
+	}
+
+	template<typename... Args>
+	static std::string createVoidSignature(const Args& ... args)
+	{
+		std::ostringstream os;
+		os << "(";
+		buildSignature(os, args...);
+		os << ")" << getSignaturePart();
+		return os.str();
+	}
 
 	/**
 	 * Create a new JniObject
