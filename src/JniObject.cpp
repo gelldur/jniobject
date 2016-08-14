@@ -106,8 +106,6 @@ jclass Jni::getClass(const std::string& classPath, bool cache)
 	return nullptr;
 }
 
-#pragma mark - JniObject
-
 JniObject::JniObject(const std::string& classPath, jobject objId, jclass classId)
 		: _instance(nullptr)
 		, _class(nullptr)
@@ -325,8 +323,6 @@ bool JniObject::operator==(const JniObject& other) const
 	return env->IsSameObject(a, b);
 }
 
-#pragma mark - JniObject::getSignaturePart
-
 template<>
 std::string JniObject::getSignaturePart<std::string>(const std::string& val)
 {
@@ -409,8 +405,6 @@ std::string JniObject::getSignaturePart()
 {
 	return "V";
 }
-
-#pragma mark - JniObject::convertToJavaValue
 
 template<>
 jvalue JniObject::convertToJavaValue(const bool& obj)
@@ -517,8 +511,6 @@ jvalue JniObject::convertToJavaValue(const std::string& obj)
 	return convertToJavaValue(env->NewStringUTF(obj.c_str()));
 }
 
-#pragma mark - JniObject::isObjectArgument
-
 template<>
 bool JniObject::isObjectArgument(const bool& obj)
 {
@@ -615,8 +607,6 @@ bool JniObject::isObjectArgument(const std::string& obj)
 	return true;
 }
 
-#pragma mark - JniObject::convertFromJavaObject
-
 template<>
 bool JniObject::convertFromJavaObject(JNIEnv* env, jobject obj, std::string& out)
 {
@@ -706,8 +696,6 @@ bool JniObject::convertFromJavaObject(JNIEnv* env, jobject obj, long& out)
 	out = JniObject("java/lang/Long", obj).call("longValue", out);
 	return true;
 }
-
-#pragma mark - JniObject call jni
 
 template<>
 void JniObject::callStaticJavaMethod(JNIEnv* env, jclass classId, jmethodID methodId, jvalue* args)
